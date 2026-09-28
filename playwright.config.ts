@@ -39,6 +39,13 @@ export default defineConfig({
     },
     projects: [
         {
+            name: 'chrome',
+            use: {
+                ...devices['Desktop Chrome'],
+                channel: 'chrome', // Launches locally installed Google Chrome
+            },
+        },
+        {
             name: 'chromium',
             use: { ...devices['Desktop Chrome'] },
         },
