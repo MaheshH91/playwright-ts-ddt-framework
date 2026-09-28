@@ -3,22 +3,22 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
- "scripts": {
-   
-  "test": "playwright test",
-  "test:headed": "playwright test --headed",
-  "test:chrome": "playwright test --project=chromium",
-  "test:firefox": "playwright test --project=firefox",
-  "test:edge": "playwright test --project=edge",
-  "test:smoke": "playwright test --grep @smoke",
-  "test:regression": "playwright test --grep @regression",
-  "report": "playwright show-report"
-},
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:chrome": "playwright test --project=chromium",
+    "test:firefox": "playwright test --project=firefox",
+    "test:edge": "playwright test --project=edge",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:regression": "playwright test --grep @regression",
+    "report": "playwright show-report"
+  },
   "keywords": [],
   "type": "commonjs",
   "devDependencies": {
     "@playwright/test": "^1.63.0",
     "@types/node": "^26.6.3",
+    "allure-playwright": "^3.13.0",
     "dotenv": "^18.0.4",
     "typescript": "^7.0.2",
     "xlsx": "^0.18.5"
