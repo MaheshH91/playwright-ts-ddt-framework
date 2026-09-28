@@ -37,7 +37,7 @@ pipeline {
     environment {
         CI = 'true'
         HEADLESS = "${params.HEADLESS}"
-        URL = 'https://tutorialsninja.com/demo/'
+        APP_URL = 'https://tutorialsninja.com/demo/'
     }
 
     stages {
@@ -67,6 +67,7 @@ pipeline {
                     // Continue pipeline execution even if tests fail so reports are always generated
                     catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
                         bat """
+                            set URL=${APP_URL}
                             npx playwright test ${projectArg} ${grepArg} ${workersArg}
                         """
                     }
