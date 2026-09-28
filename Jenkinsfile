@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        nodejs 'NodeJS' // Must match the name configured in Jenkins under Global Tool Configuration
+        nodejs 'NodeJS' // Configured under Manage Jenkins > Tools
     }
 
     parameters {
@@ -50,7 +50,6 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                // Installs packages and Playwright browser binaries
                 bat '''
                     npm ci
                     npx playwright install --with-deps
@@ -65,10 +64,12 @@ pipeline {
                     def grepArg = params.TAG == 'all' ? '' : "--grep ${params.TAG}"
                     def workersArg = "--workers=${params.WORKERS}"
 
-                    // Execute Playwright command on Windows runner
-                    bat """
-                        npx playwright test ${projectArg} ${grepArg} ${workersArg}
-                    """
+                    // Continue pipeline execution even if tests fail so reports are always generated
+                    catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                        bat """
+                            npx playwright test ${projectArg} ${grepArg} ${workersArg}
+                        """
+                    }
                 }
             }
         }
@@ -76,7 +77,16 @@ pipeline {
 
     post {
         always {
-            // 1. Publish Playwright HTML Report
+            // 1. Generate & Publish Allure Report
+            allure([
+                includeProperties: false,
+                jdk: '',
+                properties: [],
+                reportBuildPolicy: 'ALWAYS',
+                results: [[path: 'allure-results']]
+            ])
+
+            // 2. Publish Standard Playwright HTML Report
             publishHTML(target: [
                 allowMissing: true,
                 alwaysLinkToLastBuild: true,
@@ -86,11 +96,8 @@ pipeline {
                 reportName: 'Playwright Test Report'
             ])
 
-            // 2. Archive test artifacts (traces, failure screenshots, videos)
+            // 3. Archive Artifacts
             archiveArtifacts artifacts: 'test-results/**, playwright-report/**', allowEmptyArchive: true
-        }
-        failure {
-            echo "Build failed. Check test-results/ traces and Playwright Test Report for details."
         }
     }
 }

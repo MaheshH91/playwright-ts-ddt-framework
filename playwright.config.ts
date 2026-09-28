@@ -10,7 +10,16 @@ export default defineConfig({
     reporter: [
         ['list'],
         ['html', { outputFolder: 'playwright-report', open: 'never' }],
-        ['json', { outputFile: 'reports/test-results.json' }]
+        ['json', { outputFile: 'reports/test-results.json' }],
+
+        [
+            'allure-playwright',
+            {
+                detail: true,
+                outputFolder: 'allure-results',
+                suiteTitle: true,
+            },
+        ],
     ],
     use: {
         baseURL: ENV.BASE_URL.endsWith('/') ? ENV.BASE_URL : `${ENV.BASE_URL}/`,

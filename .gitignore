@@ -6,3 +6,5 @@ node_modules/
 /reports/
 /logs/
 .env
+allure-results/
+allure-report/
