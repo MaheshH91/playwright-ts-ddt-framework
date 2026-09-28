@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        nodejs 'NodeJS' // Configured under Manage Jenkins > Tools
+        nodejs 'NodeJS 26.4.0'
     }
 
     parameters {
