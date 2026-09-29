@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     tools {
+        // Ensure this exact name is configured under Manage Jenkins > Tools > NodeJS
         nodejs 'NodeJS 24.21.0'
     }
 
@@ -32,12 +33,13 @@ pipeline {
         timeout(time: 45, unit: 'MINUTES')
         ansiColor('xterm')
         disableConcurrentBuilds()
+        timestamps()
     }
 
     environment {
         CI = 'true'
         HEADLESS = "${params.HEADLESS}"
-        APP_URL = 'https://tutorialsninja.com/demo/'
+        APP_URL = '[https://tutorialsninja.com/demo/](https://tutorialsninja.com/demo/)'
     }
 
     stages {
@@ -51,9 +53,43 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 bat '''
-                    npm ci
-                    npx playwright install --with-deps
-                    npx playwright install ffmpeg
+                    @echo off
+                    echo ========================================
+                    echo Installing Node.js dependencies
+                    echo ========================================
+                    call npm ci
+
+                    echo ========================================
+                    echo Installing Playwright browsers
+                    echo ========================================
+                    call npx playwright install
+
+                    echo ========================================
+                    echo Installing Playwright FFmpeg
+                    echo ========================================
+                    call npx playwright install ffmpeg
+                '''
+            }
+        }
+
+        stage('Validate Playwright Installation') {
+            steps {
+                bat '''
+                    @echo off
+                    echo ========================================
+                    echo Playwright Version
+                    echo ========================================
+                    call npx playwright --version
+
+                    echo ========================================
+                    echo Node.js Version
+                    echo ========================================
+                    node --version
+
+                    echo ========================================
+                    echo npm Version
+                    echo ========================================
+                    call npm --version
                 '''
             }
         }
@@ -65,11 +101,19 @@ pipeline {
                     def grepArg = params.TAG == 'all' ? '' : "--grep \"${params.TAG}\""
                     def workersArg = "--workers=${params.WORKERS}"
 
-                    // Pass APP_URL cleanly into URL environment variable
-                    withEnv(["URL=${APP_URL}"]) {
-                        // Mark stage as FAILURE and build as UNSTABLE on test failure, allowing post actions to run
+                    echo "========================================"
+                    echo "Playwright Execution Configuration"
+                    echo "========================================"
+                    echo "Project : ${params.PROJECT}"
+                    echo "Tag     : ${params.TAG}"
+                    echo "Headless: ${params.HEADLESS}"
+                    echo "Workers : ${params.WORKERS}"
+                    echo "URL     : ${APP_URL}"
+                    echo "========================================"
+
+                    withEnv(["URL=${APP_URL}", "HEADLESS=${HEADLESS}"]) {
                         catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
-                            bat "npx playwright test ${projectArg} ${grepArg} ${workersArg}"
+                            bat "call npx playwright test ${projectArg} ${grepArg} ${workersArg}"
                         }
                     }
                 }
@@ -79,7 +123,11 @@ pipeline {
 
     post {
         always {
-            // 1. Generate & Publish Allure Report
+            echo '========================================'
+            echo 'Publishing Test Reports'
+            echo '========================================'
+
+            // Allure Report
             allure([
                 includeProperties: false,
                 jdk: '',
@@ -88,7 +136,7 @@ pipeline {
                 results: [[path: 'allure-results']]
             ])
 
-            // 2. Publish Standard Playwright HTML Report
+            // Playwright HTML Report
             publishHTML(target: [
                 allowMissing: true,
                 alwaysLinkToLastBuild: true,
@@ -98,8 +146,23 @@ pipeline {
                 reportName: 'Playwright Test Report'
             ])
 
-            // 3. Archive Artifacts
-            archiveArtifacts artifacts: 'test-results/**, playwright-report/**', allowEmptyArchive: true
+            // Test Artifacts
+            archiveArtifacts(
+                artifacts: 'test-results/**, playwright-report/**, allure-results/**',
+                allowEmptyArchive: true
+            )
+        }
+
+        success {
+            echo 'Playwright test execution completed successfully.'
+        }
+
+        unstable {
+            echo 'Playwright tests completed with failures. Review the reports.'
+        }
+
+        failure {
+            echo 'Jenkins pipeline failed. Check the console output.'
         }
     }
 }
