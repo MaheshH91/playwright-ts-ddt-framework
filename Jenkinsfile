@@ -7,10 +7,10 @@ pipeline {
 
     parameters {
         choice(
-            name: 'PROJECT',
-            choices: ['all', 'chromium', 'firefox', 'edge'],
-            description: 'Select target browser/project to execute'
-        )
+    name: 'PROJECT',
+    choices: ['all', 'chrome', 'chromium', 'firefox', 'webkit', 'edge'],
+    description: 'Select target browser/project to execute'
+)
         choice(
             name: 'TAG',
             choices: ['all', '@smoke', '@regression'],

@@ -11,7 +11,6 @@ export default defineConfig({
         ['list'],
         ['html', { outputFolder: 'playwright-report', open: 'never' }],
         ['json', { outputFile: 'reports/test-results.json' }],
-
         [
             'allure-playwright',
             {
@@ -31,11 +30,21 @@ export default defineConfig({
         video: 'retain-on-failure',
         trace: 'retain-on-failure',
 
+        // Critical flags for headless execution under Windows service accounts (Jenkins SYSTEM)
+        launchOptions: {
+            args: [
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-gpu',
+                '--disable-dev-shm-usage',
+            ],
+        },
+
         // Custom headers to prevent server-side redirect triggers
         userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
         extraHTTPHeaders: {
             'Accept-Language': 'en-US,en;q=0.9',
-        }
+        },
     },
     projects: [
         {
@@ -54,8 +63,15 @@ export default defineConfig({
             use: { ...devices['Desktop Firefox'] },
         },
         {
+            name: 'webkit',
+            use: { ...devices['Desktop Safari'] },
+        },
+        {
             name: 'edge',
-            use: { ...devices['Desktop Edge'], channel: 'msedge' },
-        }
-    ]
+            use: {
+                ...devices['Desktop Edge'],
+                channel: 'msedge', // Launches locally installed Microsoft Edge
+            },
+        },
+    ],
 });
