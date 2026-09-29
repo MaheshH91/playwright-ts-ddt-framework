@@ -33,10 +33,19 @@ export default defineConfig({
         // Critical flags for headless execution under Windows service accounts (Jenkins SYSTEM)
         launchOptions: {
             args: [
+                '--headless=new',
                 '--no-sandbox',
                 '--disable-setuid-sandbox',
                 '--disable-gpu',
                 '--disable-dev-shm-usage',
+                '--disable-software-rasterizer',
+                '--no-zygote',
+                '--single-process',
+                '--disable-background-networking',
+                '--disable-default-apps',
+                '--disable-extensions',
+                '--disable-sync',
+                '--remote-debugging-port=0',
             ],
         },
 

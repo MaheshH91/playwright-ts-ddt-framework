@@ -7,10 +7,10 @@ pipeline {
 
     parameters {
         choice(
-    name: 'PROJECT',
-    choices: ['all', 'chrome', 'chromium', 'firefox', 'webkit', 'edge'],
-    description: 'Select target browser/project to execute'
-)
+            name: 'PROJECT',
+            choices: ['all', 'chrome', 'chromium', 'firefox', 'webkit', 'edge'],
+            description: 'Select target browser/project to execute'
+        )
         choice(
             name: 'TAG',
             choices: ['all', '@smoke', '@regression'],
@@ -52,7 +52,8 @@ pipeline {
             steps {
                 bat '''
                     npm ci
-                    npx playwright install
+                    npx playwright install --with-deps
+                    npx playwright install ffmpeg
                 '''
             }
         }
@@ -61,15 +62,15 @@ pipeline {
             steps {
                 script {
                     def projectArg = params.PROJECT == 'all' ? '' : "--project=${params.PROJECT}"
-                    def grepArg = params.TAG == 'all' ? '' : "--grep ${params.TAG}"
+                    def grepArg = params.TAG == 'all' ? '' : "--grep \"${params.TAG}\""
                     def workersArg = "--workers=${params.WORKERS}"
 
-                    // Continue pipeline execution even if tests fail so reports are always generated
-                    catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
-                        bat """
-                            set URL=${APP_URL}
-                            npx playwright test ${projectArg} ${grepArg} ${workersArg}
-                        """
+                    // Pass APP_URL cleanly into URL environment variable
+                    withEnv(["URL=${APP_URL}"]) {
+                        // Mark stage as FAILURE and build as UNSTABLE on test failure, allowing post actions to run
+                        catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                            bat "npx playwright test ${projectArg} ${grepArg} ${workersArg}"
+                        }
                     }
                 }
             }
