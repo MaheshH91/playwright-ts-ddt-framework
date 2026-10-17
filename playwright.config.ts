@@ -21,8 +21,8 @@ export default defineConfig({
         ],
     ],
     use: {
-        baseURL: ENV.BASE_URL.endsWith('/') ? ENV.BASE_URL : `${ENV.BASE_URL}/`,
-        headless: ENV.HEADLESS,
+        baseURL: process.env.URL || ENV.BASE_URL || 'https://tutorialsninja.com/demo/',
+        headless: process.env.HEADLESS !== 'false',
         viewport: { width: 1920, height: 1080 },
         actionTimeout: Number(ENV.EXPLICIT_WAIT) * 1000,
         navigationTimeout: Number(ENV.PAGE_LOAD_TIMEOUT) * 1000,
@@ -30,22 +30,13 @@ export default defineConfig({
         video: 'retain-on-failure',
         trace: 'retain-on-failure',
 
-        // Critical flags for headless execution under Windows service accounts (Jenkins SYSTEM)
+        // Cleaned launch options that work consistently across headed, headless, and CI/Jenkins environments
         launchOptions: {
             args: [
-                '--headless=new',
                 '--no-sandbox',
                 '--disable-setuid-sandbox',
                 '--disable-gpu',
                 '--disable-dev-shm-usage',
-                '--disable-software-rasterizer',
-                '--no-zygote',
-                '--single-process',
-                '--disable-background-networking',
-                '--disable-default-apps',
-                '--disable-extensions',
-                '--disable-sync',
-                '--remote-debugging-port=0',
             ],
         },
 

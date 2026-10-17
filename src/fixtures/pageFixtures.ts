@@ -1,4 +1,6 @@
-import { test as baseTest } from '@playwright/test';
+// src/fixtures/pageFixtures.ts
+import { test as baseTest, expect } from '@playwright/test';
+
 import { HomePage } from '../pages/HomePage';
 import { LoginPage } from '../pages/LoginPage';
 import { RegisterPage } from '../pages/RegisterPage';
@@ -13,20 +15,27 @@ type Pages = {
 
 export const test = baseTest.extend<Pages>({
     homePage: async ({ page }, use) => {
-        // 'domcontentloaded' avoids hanging on slow tracking/asset scripts on TutorialsNinja
-        // Using '' or './' resolves correctly to the baseURL with the /demo/ path
-        await page.goto('./', { waitUntil: 'domcontentloaded' });
-        await use(new HomePage(page));
+        const homePage = new HomePage(page);
+
+        // Use '' or 'index.php' to preserve https://tutorialsninja.com/demo/
+        await page.goto('', {
+            waitUntil: 'domcontentloaded',
+        });
+
+        await use(homePage);
     },
+
     loginPage: async ({ page }, use) => {
         await use(new LoginPage(page));
     },
+
     registerPage: async ({ page }, use) => {
         await use(new RegisterPage(page));
     },
+
     searchPage: async ({ page }, use) => {
         await use(new SearchPage(page));
-    }
+    },
 });
 
-export { expect } from '@playwright/test';
+export { expect };
