@@ -4,6 +4,7 @@ import { ENV } from './src/config/env.config';
 export default defineConfig({
     testDir: './tests',
     fullyParallel: true,
+    globalSetup: './src/utils/allureEnvSetup.ts',
     forbidOnly: !!process.env.CI,
     retries: process.env.CI ? 2 : Number(ENV.MAX_RETRY_COUNT) || 1,
     workers: process.env.CI ? 2 : undefined,

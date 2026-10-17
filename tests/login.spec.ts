@@ -25,4 +25,5 @@ test.describe('Login Functionality Tests', () => {
         await loginPage.clickLogin();
         await expect(loginPage.warningMessage).toContainText('Warning: No match for E-Mail Address and/or Password.');
     });
+    test.skip('Skipped test category verification', async () => { });
 });

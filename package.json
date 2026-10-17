@@ -1,22 +1,30 @@
 {
   "name": "playwright-ts-ddt-framework",
   "version": "1.0.0",
-  "description": "",
+  "description": "Playwright TypeScript Data-Driven Testing Framework",
   "main": "index.js",
   "scripts": {
     "test": "playwright test",
     "test:headed": "playwright test --headed",
-    "test:chrome": "playwright test --project=chromium",
+    "test:chrome": "playwright test --project=chrome",
+    "test:chromium": "playwright test --project=chromium",
     "test:firefox": "playwright test --project=firefox",
+    "test:webkit": "playwright test --project=webkit",
     "test:edge": "playwright test --project=edge",
     "test:smoke": "playwright test --grep @smoke",
     "test:regression": "playwright test --grep @regression",
     "report": "playwright show-report",
-    "allure:generate": "allure generate allure-results -o allure-report --clean",
+    "allure:prep": "node scripts/allure-prep.js",
+    "allure:generate": "npm run allure:prep && allure generate allure-results --clean -o allure-report",
     "allure:open": "allure open allure-report",
     "allure:serve": "allure serve allure-results"
   },
-  "keywords": [],
+  "keywords": [
+    "playwright",
+    "typescript",
+    "automation",
+    "ddt"
+  ],
   "type": "commonjs",
   "devDependencies": {
     "@playwright/test": "^1.64.1",
