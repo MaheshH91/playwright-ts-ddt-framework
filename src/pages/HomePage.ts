@@ -19,53 +19,33 @@ export class HomePage extends BasePage {
         this.loginOption = page.locator('ul.dropdown-menu a:has-text("Login")');
         this.logoutOption = page.locator('ul.dropdown-menu a:has-text("Logout"), aside#column-right a:has-text("Logout")');
         this.registerOption = page.locator('ul.dropdown-menu a:has-text("Register")');
-        // Match both standalone search input and nested #search container
+
+        // Matches both nested and standalone search inputs & buttons
         this.searchBoxField = page.locator('#search input[name="search"], input[name="search"]');
         this.searchButton = page.locator('#search button, #search .btn-default');
     }
 
     async navigateToLoginPage(): Promise<LoginPage> {
-        // Step 1: If already logged in on an account page with a visible sidebar logout link, click it
-        if (await this.logoutOption.first().isVisible()) {
-            await this.logoutOption.first().click();
-        }
-
-        try {
-            await this.myAccountDropMenu.click({ timeout: 3000 });
-
-            // Step 2: If the dropdown menu shows "Logout" instead of "Login", clear the active session
-            if (await this.logoutOption.first().isVisible()) {
-                await this.logoutOption.first().click();
-                await this.myAccountDropMenu.click({ timeout: 3000 });
-            }
-
-            await this.loginOption.click({ timeout: 3000 });
-        } catch {
-            await this.page.goto('index.php?route=account/login', { waitUntil: 'domcontentloaded' });
-        }
+        // Direct navigation is fast, reliable, and avoids animation race conditions
+        await this.page.goto('index.php?route=account/login', {
+            waitUntil: 'commit',
+            timeout: 15000,
+        });
 
         const loginPage = new LoginPage(this.page);
-        await loginPage.emailField.waitFor({ state: 'visible', timeout: 10000 });
+        await loginPage.emailField.waitFor({ state: 'visible', timeout: 15000 });
         return loginPage;
     }
 
     async navigateToRegisterPage(): Promise<RegisterPage> {
-        // Clear active session if on an account page
-        if (await this.logoutOption.first().isVisible()) {
-            await this.logoutOption.first().click();
-        }
+        await this.page.goto('index.php?route=account/register', {
+            waitUntil: 'commit',
+            timeout: 15000,
+        });
 
-        try {
-            await this.myAccountDropMenu.click({ timeout: 3000 });
-            if (await this.logoutOption.first().isVisible()) {
-                await this.logoutOption.first().click();
-                await this.myAccountDropMenu.click({ timeout: 3000 });
-            }
-            await this.registerOption.click({ timeout: 3000 });
-        } catch {
-            await this.page.goto('index.php?route=account/register', { waitUntil: 'domcontentloaded' });
-        }
-        return new RegisterPage(this.page);
+        const registerPage = new RegisterPage(this.page);
+        await registerPage.firstNameField.waitFor({ state: 'visible', timeout: 15000 });
+        return registerPage;
     }
 
     async searchProduct(productName: string): Promise<SearchPage> {
