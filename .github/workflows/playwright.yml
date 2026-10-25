@@ -1,0 +1,98 @@
+name: Playwright Tests & Email Report
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+    inputs:
+      project:
+        description: 'Target browser'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - chromium
+          - firefox
+          - edge
+      tag:
+        description: 'Tag to run'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - '@smoke'
+          - '@regression'
+
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright Tests
+        id: run_tests
+        continue-on-error: true
+        run: |
+          PROJECT_ARG="${{ github.event.inputs.project != 'all' && github.event.inputs.project != '' && format('--project={0}', github.event.inputs.project) || '' }}"
+          TAG_ARG="${{ github.event.inputs.tag != 'all' && github.event.inputs.tag != '' && format('--grep {0}', github.event.inputs.tag) || '' }}"
+          npx playwright test $PROJECT_ARG $TAG_ARG
+        env:
+          HEADLESS: true
+          URL: https://tutorialsninja.com/demo/
+
+      - name: Zip Playwright Report
+        if: always()
+        run: |
+          if [ -d "playwright-report" ]; then
+            zip -r playwright-report.zip playwright-report/
+          fi
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Send Execution Email Notification
+        uses: dawidd6/action-send-mail@v3
+        if: always()
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: "GitHub Actions: Playwright Tests ${{ steps.run_tests.outcome == 'success' && 'PASSED' || 'FAILED' }} (${{ github.repository }})"
+          to: ${{ secrets.MAIL_TO }}
+          from: "Playwright Automation CI <${{ secrets.MAIL_USERNAME }}>"
+          html_body: |
+            <h2>Playwright Test Execution Results</h2>
+            <p><strong>Repository:</strong> ${{ github.repository }}</p>
+            <p><strong>Branch:</strong> ${{ github.ref_name }}</p>
+            <p><strong>Commit:</strong> ${{ github.sha }}</p>
+            <p><strong>Status:</strong> <span style="color: ${{ steps.run_tests.outcome == 'success' && 'green' || 'red' }}; font-weight: bold;">${{ steps.run_tests.outcome }}</span></p>
+            <p><a href="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}">View GitHub Actions Run Logs & Artifacts</a></p>
+          attachments: playwright-report.zip
+
+      - name: Check Final Status
+        if: steps.run_tests.outcome != 'success'
+        run: exit 1
