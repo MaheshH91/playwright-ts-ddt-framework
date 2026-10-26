@@ -2,28 +2,57 @@
 
 An enterprise-grade **End-to-End Test Automation Framework** built with **Playwright, TypeScript, Page Object Model (POM), and Data-Driven Testing (DDT)** using JSON and Excel test data.
 
-The framework targets the **TutorialsNinja Demo Application** and is designed for maintainable UI automation, cross-browser execution, parallel testing, robust synchronization, reusable page objects, and CI/CD-friendly execution.
+The framework targets the **TutorialsNinja Demo Application** and is designed for maintainable UI automation, cross-browser execution, parallel testing, robust synchronization, reusable page objects, comprehensive reporting, and CI/CD execution via Jenkins and GitHub Actions.
+
+---
+
+## 🛡️ Tools & Technologies Badges
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Node.js-24.21.0-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js 24.21.0" />
+  <img src="https://img.shields.io/badge/Playwright-1.64.1-45ba4b?style=for-the-badge&logo=playwright&logoColor=white" alt="Playwright 1.64.1" />
+  <img src="https://img.shields.io/badge/TypeScript-5.7.3-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript 5.7.3" />
+  <img src="https://img.shields.io/badge/JavaScript-Test_Data_Utilities-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript utilities" />
+  <img src="https://img.shields.io/badge/npm-Package_Manager-CB3837?style=for-the-badge&logo=npm&logoColor=white" alt="npm" />
+  <img src="https://img.shields.io/badge/Page_Object_Model-POM-6A5ACD?style=for-the-badge" alt="Page Object Model" />
+  <img src="https://img.shields.io/badge/Data--Driven_Testing-DDT-008080?style=for-the-badge" alt="Data-Driven Testing" />
+  <img src="https://img.shields.io/badge/JSON-Test_Data-000000?style=for-the-badge&logo=json&logoColor=white" alt="JSON test data" />
+  <img src="https://img.shields.io/badge/Excel-XLSX-217346?style=for-the-badge&logo=microsoftexcel&logoColor=white" alt="Excel test data" />
+  <img src="https://img.shields.io/badge/dotenv-Environment_Config-ECD53F?style=for-the-badge&logo=dotenv&logoColor=black" alt="dotenv" />
+  <img src="https://img.shields.io/badge/Allure-Reports-FF6A00?style=for-the-badge&logo=allure&logoColor=white" alt="Allure reporting" />
+  <img src="https://img.shields.io/badge/HTML_Report-Playwright-2E8B57?style=for-the-badge&logo=html5&logoColor=white" alt="Playwright HTML report" />
+  <img src="https://img.shields.io/badge/Git-Version_Control-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git" />
+  <img src="https://img.shields.io/badge/GitHub-Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white" alt="GitHub Actions CI" />
+  <img src="https://img.shields.io/badge/Jenkins-Pipeline-D24939?style=for-the-badge&logo=jenkins&logoColor=white" alt="Jenkins Pipeline" />
+  <img src="https://img.shields.io/badge/Chromium-Browser-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Chromium" />
+  <img src="https://img.shields.io/badge/Google_Chrome-Browser-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Google Chrome" />
+  <img src="https://img.shields.io/badge/Mozilla_Firefox-Browser-FF7139?style=for-the-badge&logo=firefoxbrowser&logoColor=white" alt="Mozilla Firefox" />
+  <img src="https://img.shields.io/badge/Microsoft_Edge-Browser-0078D7?style=for-the-badge&logo=microsoftedge&logoColor=white" alt="Microsoft Edge" />
+  <img src="https://img.shields.io/badge/WebKit-Browser_Engine-000000?style=for-the-badge&logo=safari&logoColor=white" alt="WebKit" />
+  <img src="https://img.shields.io/badge/TutorialsNinja-Demo_Application-4B5563?style=for-the-badge" alt="TutorialsNinja demo application" />
+</p>
 
 ---
 
 ## 📌 Table of Contents
 
-- [Overview](#-overview)
-- [Tech Stack](#-tech-stack)
-- [Framework Features](#-framework-features)
-- [Architecture](#-architecture)
-- [Project Structure](#-project-structure)
-- [Prerequisites](#-prerequisites)
-- [Getting Started](#-getting-started)
-- [Configuration](#%EF%B8%8F-configuration)
-- [Data-Driven Testing](#-data-driven-testing-ddt)
-- [Running Tests](#-running-tests)
-- [Cross-Browser Execution](#-cross-browser-execution)
-- [Reports & Failure Evidence](#-reports--failure-evidence)
-- [CI/CD with Jenkins](#-cicd-with-jenkins)
-- [Git Workflow](#-git-workflow)
-- [Best Practices](#-best-practices)
-- [Author & Profiles](#-author--profiles)
+* [Overview](https://www.google.com/search?q=%23-overview)
+* [Tools & Technologies](https://www.google.com/search?q=%23-tools--technologies)
+* [Framework Features](https://www.google.com/search?q=%23-framework-features)
+* [Architecture](https://www.google.com/search?q=%23-architecture)
+* [Project Structure](https://www.google.com/search?q=%23-project-structure)
+* [Prerequisites](https://www.google.com/search?q=%23-prerequisites)
+* [Getting Started](https://www.google.com/search?q=%23-getting-started)
+* [Configuration](https://www.google.com/search?q=%23%25EF%25B8%258F-configuration)
+* [Data-Driven Testing (DDT)](https://www.google.com/search?q=%23-data-driven-testing-ddt)
+* [Running Tests](https://www.google.com/search?q=%23-running-tests)
+* [Cross-Browser Execution](https://www.google.com/search?q=%23-cross-browser-execution)
+* [Reports & Failure Evidence](https://www.google.com/search?q=%23-reports--failure-evidence)
+* [CI/CD Pipelines](https://www.google.com/search?q=%23-cicd-pipelines)
+* [Git Workflow](https://www.google.com/search?q=%23-git-workflow)
+* [Best Practices](https://www.google.com/search?q=%23-best-practices)
+* [Author](https://www.google.com/search?q=%23-author)
+* [License](https://www.google.com/search?q=%23-license)
 
 ---
 
@@ -35,47 +64,40 @@ It follows the **Page Object Model** to separate test intent from UI implementat
 
 The framework is designed around:
 
-- Maintainable Page Object classes
-- Strongly typed TypeScript code
-- Playwright auto-waiting
-- Web-first assertions
-- Cross-browser projects
-- Parallel test execution
-- JSON-based DDT
-- Excel-based DDT
-- Custom Playwright fixtures
-- Environment-based configuration
-- Playwright HTML reporting
-- Allure reporting
-- Failure screenshots
-- Trace and video artifacts
-- Jenkins CI/CD integration
-- GitHub-based version control workflow
-
-Playwright supports multiple browser projects, including Chromium, Firefox, WebKit, Google Chrome, and Microsoft Edge, through `playwright.config.ts`.
+* Maintainable Page Object classes
+* Strongly typed TypeScript code
+* Playwright auto-waiting
+* Web-first assertions
+* Cross-browser projects
+* Parallel test execution
+* JSON-based DDT
+* Excel-based DDT
+* Custom Playwright fixtures
+* Environment-based configuration
+* Standalone Playwright HTML reporting
+* Allure reporting
+* Failure screenshots, traces, and video artifacts
+* Jenkins & GitHub Actions CI/CD with automated email reports
 
 ---
 
-## 🛠 Tech Stack
+## 🛠 Tools & Technologies
 
-| Technology | Purpose |
-| :--- | :--- |
-| **Playwright Test** | Browser automation, test execution, auto-waiting, assertions and reporting |
-| **TypeScript** | Strong typing and scalable test development |
-| **Node.js** | JavaScript runtime for the test framework |
-| **npm** | Package management and script execution |
-| **Page Object Model** | UI abstraction and separation of concerns |
-| **XLSX / SheetJS** | Excel test-data processing |
-| **JSON** | Structured external test data |
-| **dotenv** | Environment configuration |
-| **Custom Fixtures** | Dependency injection and reusable test setup |
-| **Allure Reporter** | Detailed execution dashboards and historical reporting |
-| **Playwright HTML Reporter** | Native execution report with traces and artifacts |
-| **Jenkins** | CI/CD pipeline automation |
-| **GitHub Actions** | Workflow automation and repository-based CI |
-| **Git & GitHub** | Version control, collaboration, and source management |
-| **VS Code** | Development environment |
-| **Browsers** | Chromium, Chrome, Firefox, Microsoft Edge |
+| Technology | Category | Purpose |
+| --- | --- | --- |
+| **Playwright Test** | Test Automation | Browser automation, test execution, auto-waiting, and native assertion engine |
+| **TypeScript** | Core Language | Type-safe, scalable object-oriented test scripting |
+| **Page Object Model** | Design Pattern | Abstraction of web UI elements and operational behaviors |
+| **XLSX / SheetJS** | Test Data | Dynamic Excel spreadsheet workbook and worksheet data parsing |
+| **JSON** | Test Data | External hierarchical test data management |
+| **dotenv** | Configuration | Environment-specific variable management |
+| **Custom Fixtures** | Architecture | Dependency injection and reusable lifecycle test setup |
+| **Allure Reporter** | Reporting | Interactive dashboards with historical test execution analytics |
+| **Playwright HTML Reporter** | Reporting | Standalone single-file HTML reports and trace viewers |
+| **Jenkins** | CI/CD | Parameterized declarative pipeline test orchestration |
+| **GitHub Actions** | CI/CD | Containerized headless test runner with email reporting |
+| **Email-ext / Action-Send-Mail** | Notifications | Automated test result emails with standalone HTML report distribution |
+| **Browsers** | Runtime Engines | Chromium, Google Chrome, Mozilla Firefox, Microsoft Edge, WebKit |
 
 ---
 
@@ -87,11 +109,11 @@ The framework uses the **Page Object Model (POM)** design pattern.
 
 Each application page has a dedicated class responsible for:
 
-- Locators
-- Page navigation
-- UI actions
-- Page-specific validations
-- Reusable business operations
+* Locators
+* Page navigation
+* UI actions
+* Page-specific validations
+* Reusable business operations
 
 Example page objects:
 
@@ -103,6 +125,7 @@ RegisterPage
 AccountPage
 AccountSuccessPage
 SearchPage
+
 ```
 
 This approach keeps test cases focused on **business behavior** instead of low-level UI implementation.
@@ -115,6 +138,7 @@ The framework uses Playwright's asynchronous web-first assertions:
 
 ```typescript
 await expect(locator).toBeVisible();
+
 ```
 
 These assertions automatically wait for the expected condition instead of requiring arbitrary delays.
@@ -127,13 +151,12 @@ The framework avoids unnecessary:
 
 ```typescript
 await page.waitForTimeout();
+
 ```
 
 Instead, Playwright's built-in synchronization and locator assertions are used wherever possible.
 
 This helps reduce timing-related test failures and improves execution stability.
-
-Playwright provides automatic waiting around actions and web-first assertions as part of its test model.
 
 ---
 
@@ -144,11 +167,10 @@ The framework supports multiple external data sources:
 ```text
 JSON
 Excel
+
 ```
 
 This allows test logic to remain independent from test data.
-
-Example:
 
 ```text
 Test Logic
@@ -156,6 +178,7 @@ Test Logic
     ├── JSON Data
     │
     └── Excel Data
+
 ```
 
 ---
@@ -166,6 +189,7 @@ Login credentials can be maintained in:
 
 ```text
 data/loginData.json
+
 ```
 
 The framework supports both valid and invalid user datasets.
@@ -189,6 +213,7 @@ Example:
     }
   ]
 }
+
 ```
 
 Tests can iterate through these datasets without duplicating test logic.
@@ -201,30 +226,26 @@ Excel test data is maintained in:
 
 ```text
 data/TutorialsNinjaTestData.xlsx
+
 ```
 
-The login dataset is stored under the:
-
-```text
-Login
-```
-
-worksheet.
+The login dataset is stored under the `Login` worksheet.
 
 The framework uses the `xlsx` package through:
 
 ```text
 src/utils/ExcelUtils.ts
+
 ```
 
 Example:
 
 ```typescript
-const excelUsers =
-  ExcelUtils.getTestData<{ Email: string; Password: string }>(
-    'data/TutorialsNinjaTestData.xlsx',
-    'Login'
-  );
+const excelUsers = ExcelUtils.getTestData<{ Email: string; Password: string }>(
+  'data/TutorialsNinjaTestData.xlsx',
+  'Login'
+);
+
 ```
 
 The utility dynamically reads worksheet records rather than relying on hardcoded row or column indexes.
@@ -233,18 +254,19 @@ The utility dynamically reads worksheet records rather than relying on hardcoded
 
 ### 7. Custom Playwright Fixtures
 
-Reusable test dependencies are provided through custom Playwright fixtures.
+Reusable test dependencies are provided through custom Playwright fixtures:
 
 ```text
 src/fixtures/pageFixtures.ts
+
 ```
 
 Fixtures provide a clean dependency-injection mechanism for:
 
-- Page Objects
-- Browser context
-- Shared test setup
-- Reusable test dependencies
+* Page Objects
+* Browser context
+* Shared test setup
+* Reusable test dependencies
 
 This keeps test specifications concise and reduces repetitive initialization code.
 
@@ -254,14 +276,12 @@ This keeps test specifications concise and reduces repetitive initialization cod
 
 The framework supports execution across:
 
-- Chromium
-- Google Chrome
-- Firefox
-- Microsoft Edge
+* Chromium
+* Google Chrome
+* Firefox
+* Microsoft Edge
 
 Playwright projects allow the same test suite to execute against multiple browser configurations.
-
-Example architecture:
 
 ```text
                     Test Suite
@@ -273,18 +293,15 @@ Example architecture:
           │             │             │
           └─────────────┼─────────────┘
                         │
-                    Test Results
+                   Test Results
+
 ```
 
 ---
 
 ### 9. Parallel Execution
 
-Playwright Test supports parallel execution through worker processes and browser projects.
-
-This allows the framework to execute tests concurrently while maintaining isolated browser contexts.
-
-Parallel execution can significantly reduce overall suite execution time in CI environments.
+Playwright Test supports parallel execution through worker processes and browser projects. This allows the framework to execute tests concurrently while maintaining isolated browser contexts.
 
 ---
 
@@ -294,12 +311,14 @@ Runtime configuration is maintained through:
 
 ```text
 .env
+
 ```
 
 Environment-specific values can be loaded through:
 
 ```text
 src/config/env.config.ts
+
 ```
 
 This allows application URLs and execution settings to be changed without modifying test source code.
@@ -312,14 +331,14 @@ The framework follows a layered architecture:
 
 ```text
                     ┌────────────────────────┐
-                    │      Test Specs        │
+                    │       Test Specs       │
                     │ login/register/search  │
                     └───────────┬────────────┘
                                 │
                                 ▼
                     ┌────────────────────────┐
-                    │    Custom Fixtures     │
-                    │     Dependency DI      │
+                    │     Custom Fixtures    │
+                    │      Dependency DI     │
                     └───────────┬────────────┘
                                 │
                                 ▼
@@ -330,16 +349,17 @@ The framework follows a layered architecture:
                                 │
                                 ▼
                     ┌────────────────────────┐
-                    │       BasePage         │
+                    │        BasePage        │
                     │ Common UI interactions │
                     └───────────┬────────────┘
                                 │
                                 ▼
                     ┌────────────────────────┐
-                    │   Playwright Browser   │
+                    │    Playwright Engine   │
                     │ Chromium / Firefox /   │
                     │ Chrome / Edge          │
                     └────────────────────────┘
+
 ```
 
 Test data is maintained independently:
@@ -352,11 +372,12 @@ Test data is maintained independently:
                   ┌────────────┴────────────┐
                   │                         │
                   ▼                         ▼
-           loginData.json         TutorialsNinjaTestData.xlsx
+           loginData.json       TutorialsNinjaTestData.xlsx
                   │                         │
                   └────────────┬────────────┘
                                ▼
                          Test Execution
+
 ```
 
 ---
@@ -392,7 +413,8 @@ playwright-ts-ddt-framework/
 │   │
 │   └── utils/
 │       ├── DataUtils.ts
-│       └── ExcelUtils.ts
+│       ├── ExcelUtils.ts
+│       └── allureEnvSetup.ts
 │
 ├── tests/
 │   ├── login.spec.ts
@@ -406,41 +428,19 @@ playwright-ts-ddt-framework/
 ├── playwright.config.ts
 ├── tsconfig.json
 └── README.md
+
 ```
 
 ---
 
 ## 📋 Prerequisites
 
-Install the following before running the framework.
+Install the following before running the framework:
 
-### Node.js
-
-Node.js **18 or higher**:
-
-```bash
-node -v
-```
-
-### npm
-
-npm **9 or higher**:
-
-```bash
-npm -v
-```
-
-### Git
-
-```bash
-git --version
-```
-
-### Java
-
-Java is optional for the framework itself.
-
-If the project uses the Allure CLI locally, install a supported Java runtime according to the Allure installation requirements.
+* **Node.js:** `v24.x` (or `>= 18.x`)
+* **npm:** `v9.x` or higher
+* **Git:** Latest version
+* **Java (Optional):** Required only if running the Allure CLI command-line tool locally.
 
 ---
 
@@ -449,18 +449,18 @@ If the project uses the Allure CLI locally, install a supported Java runtime acc
 ### 1. Clone the Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/MaheshH91/playwright-ts-ddt-framework.git
 cd playwright-ts-ddt-framework
+
 ```
 
 ---
 
 ### 2. Install Dependencies
 
-For a reproducible installation using the lock file:
-
 ```bash
 npm ci
+
 ```
 
 ---
@@ -469,27 +469,14 @@ npm ci
 
 ```bash
 npx playwright install --with-deps
+
 ```
-
-For a specific browser:
-
-```bash
-npx playwright install chromium
-```
-
-Playwright officially supports installing browser binaries and required operating-system dependencies through the Playwright CLI.
 
 ---
 
 ## ⚙️ Configuration
 
-Environment parameters are maintained in:
-
-```text
-.env
-```
-
-### Example `.env`
+Environment parameters are maintained in `.env`:
 
 ```properties
 URL=https://tutorialsninja.com/demo/
@@ -498,15 +485,16 @@ EXPLICIT_WAIT=10
 PAGE_LOAD_TIMEOUT=15
 MAX_RETRY_COUNT=1
 
-VALID_EMAIL=<your-valid-email>
-VALID_PASSWORD=<your-valid-password>
+VALID_EMAIL=your_email@example.com
+VALID_PASSWORD=your_password
 
 FIRST_NAME=Mahesh
 LAST_NAME=Holkar
 TELEPHONE=9878943234
+
 ```
 
-> **Security:** Never commit real passwords, credentials, API keys, or other secrets to Git. Keep `.env` in `.gitignore` and provide secrets through Jenkins credentials or environment variables in CI.
+> **Security Note:** Never commit actual credentials, passwords, or access tokens to version control. The `.env` file is excluded via `.gitignore`.
 
 ---
 
@@ -514,13 +502,7 @@ TELEPHONE=9878943234
 
 ### JSON Test Data
 
-Location:
-
-```text
-data/loginData.json
-```
-
-Example:
+Located in `data/loginData.json`:
 
 ```json
 {
@@ -539,442 +521,177 @@ Example:
     }
   ]
 }
-```
 
-The test suite can iterate through multiple users without duplicating the underlying test implementation.
+```
 
 ---
 
 ### Excel Test Data
 
-Location:
-
-```text
-data/TutorialsNinjaTestData.xlsx
-```
-
-Worksheet:
-
-```text
-Login
-```
-
-Example:
+Located in `data/TutorialsNinjaTestData.xlsx` under the `Login` sheet:
 
 ```typescript
-const excelUsers =
-  ExcelUtils.getTestData<{ Email: string; Password: string }>(
-    'data/TutorialsNinjaTestData.xlsx',
-    'Login'
-  );
-```
+const excelUsers = ExcelUtils.getTestData<{ Email: string; Password: string }>(
+  'data/TutorialsNinjaTestData.xlsx',
+  'Login'
+);
 
-The Excel utility handles worksheet parsing and converts records into strongly typed TypeScript objects.
+```
 
 ---
 
 ## ▶️ Running Tests
 
-### Complete Test Suite
+### Complete Suite
 
 ```bash
 npm run test
+
 ```
 
-Runs the complete suite using the configured Playwright projects.
-
----
-
-### Headed Execution
+### Headed Mode
 
 ```bash
 npm run test:headed
+
 ```
 
-Runs tests with the browser UI visible.
-
----
-
-### Chromium / Chrome
+### Browser-Specific Runs
 
 ```bash
 npm run test:chrome
-```
-
----
-
-### Firefox
-
-```bash
 npm run test:firefox
-```
-
----
-
-### Microsoft Edge
-
-```bash
 npm run test:edge
+
 ```
 
----
-
-### Smoke Tests
+### Tagged Runs
 
 ```bash
 npm run test:smoke
-```
-
-Runs tests tagged:
-
-```text
-@smoke
-```
-
----
-
-### Regression Tests
-
-```bash
 npm run test:regression
+
 ```
 
-Runs tests tagged:
-
-```text
-@regression
-```
-
----
-
-## 🔎 Direct Playwright Commands
-
-The npm scripts provide convenient shortcuts, but Playwright can also be invoked directly.
-
-Run all tests:
+### Direct Playwright Commands
 
 ```bash
+# Run all tests
 npx playwright test
-```
 
-Run a specific test file:
-
-```bash
+# Run a specific spec
 npx playwright test tests/login.spec.ts
-```
 
-Run a specific browser project:
-
-```bash
-npx playwright test --project=firefox
-```
-
-Run in headed mode:
-
-```bash
-npx playwright test --headed
-```
-
-Run with debugging:
-
-```bash
+# Run with debugger
 npx playwright test --debug
-```
 
-Playwright supports project-specific execution using `--project` and headed/debug execution through its CLI.
+```
 
 ---
 
 ## 🌐 Cross-Browser Execution
 
-The framework is configured to support multiple browser projects.
+Configured via `playwright.config.ts`:
 
-Conceptually:
-
-```text
-npm run test
-      │
-      ├── Chromium
-      │
-      ├── Firefox
-      │
-      ├── Google Chrome
-      │
-      └── Microsoft Edge
-```
-
-Playwright projects are configured in:
-
-```text
-playwright.config.ts
-```
-
-Playwright supports both bundled browsers and branded channels such as Chrome and Edge.
+* **Chromium:** Default headless browser engine
+* **Google Chrome:** Branded channel (`channel: 'chrome'`)
+* **Firefox:** Gecko engine
+* **Microsoft Edge:** Branded channel (`channel: 'msedge'`)
+* **WebKit:** Safari rendering engine
 
 ---
 
 ## 📊 Reports & Failure Evidence
 
-The framework provides two reporting mechanisms:
-
-1. Playwright HTML Report
-2. Allure Report
-
----
-
 ### 1. Playwright HTML Report
 
-The native Playwright HTML reporter provides detailed execution information, including test results and failure details. The report can also expose trace information and attached artifacts when configured.
-
-Open the report:
+Includes step-by-step actions, screenshots, and embedded traces:
 
 ```bash
 npm run report
-```
-
-Alternatively:
-
-```bash
+# or
 npx playwright show-report
+
 ```
-
-The report can be used to investigate:
-
-- Passed tests
-- Failed tests
-- Skipped tests
-- Browser projects
-- Test duration
-- Error details
-- Screenshots
-- Trace artifacts
-
----
 
 ### 2. Allure Report
 
-The framework also integrates Allure for richer reporting and historical execution analysis.
-
-#### Serve the Report
-
 ```bash
+# Generate and serve live Allure report
 npm run allure:serve
-```
 
-#### Generate a Static Report
-
-```bash
+# Build static report
 npm run allure:generate
-```
 
-#### Open the Generated Report
-
-```bash
+# Open existing static report
 npm run allure:open
+
 ```
 
----
-
-## 📸 Failure Evidence
-
-Depending on the Playwright configuration, failed tests can retain artifacts such as:
-
-```text
-Screenshot
-Trace
-Video
-Error details
-```
-
-A typical failure-debugging flow is:
+### Failure Evidence Flow
 
 ```text
 Test Failure
      │
-     ├── Screenshot
+     ├── Screenshot (only-on-failure)
      │
-     ├── Trace
+     ├── Video (retain-on-failure)
      │
-     ├── Video
-     │
-     └── Error / Stack Trace
+     └── Playwright Trace (retain-on-failure)
              │
              ▼
-       Root Cause Analysis
-```
+      Root Cause Analysis
 
-Playwright supports configurable recording options such as screenshots, traces, and video through the test configuration.
-
----
-
-## 🔄 CI/CD with Jenkins
-
-The project contains:
-
-```text
-Jenkinsfile
-```
-
-which defines the CI/CD pipeline.
-
-The Jenkins pipeline supports configurable execution parameters such as:
-
-### Browser Selection
-
-```text
-all
-chromium
-firefox
-edge
-```
-
-### Test Tags
-
-```text
-@smoke
-@regression
-all
-```
-
-### Headless Mode
-
-```text
-true
-false
-```
-
-### Parallel Workers
-
-The number of Playwright workers can be adjusted according to the CI environment.
-
----
-
-## 🔁 Jenkins Pipeline Flow
-
-```text
-                    ┌───────────────────┐
-                    │      Jenkins      │
-                    └─────────┬─────────┘
-                              │
-                              ▼
-                    ┌───────────────────┐
-                    │ Build Parameters  │
-                    │ Browser / Tags /  │
-                    │ Workers / Headless│
-                    └─────────┬─────────┘
-                              │
-                              ▼
-                    ┌───────────────────┐
-                    │   npm ci          │
-                    └─────────┬─────────┘
-                              │
-                              ▼
-                    ┌───────────────────┐
-                    │ Install Browsers  │
-                    └─────────┬─────────┘
-                              │
-                              ▼
-                    ┌───────────────────┐
-                    │ Playwright Tests  │
-                    └─────────┬─────────┘
-                              │
-                 ┌────────────┴────────────┐
-                 ▼                         ▼
-        ┌──────────────────┐      ┌──────────────────┐
-        │ Playwright HTML  │      │  Allure Results  │
-        │     Report       │      │                  │
-        └────────┬─────────┘      └────────┬─────────┘
-                 │                         │
-                 └────────────┬────────────┘
-                              ▼
-                    ┌───────────────────┐
-                    │ Jenkins Artifacts │
-                    └───────────────────┘
 ```
 
 ---
 
-## 📦 Jenkins Artifacts
+## 🔄 CI/CD Pipelines
 
-The pipeline is designed to archive execution artifacts such as:
+### 1. Jenkins Pipeline (`Jenkinsfile`)
 
-```text
-Playwright HTML Report
-Allure Report
-Screenshots
-Traces
-Videos
-Test Results
-```
+Parameterized pipeline configured with:
 
-This allows test evidence to be accessed directly from the Jenkins build.
+* `PROJECT`: Choice parameter (`all`, `chromium`, `firefox`, `edge`)
+* `TAG`: Filter parameter (`all`, `@smoke`, `@regression`)
+* `HEADLESS`: Boolean toggle
+* `WORKERS`: Configurable parallel worker count
+* `RECIPIENTS`: Comma-separated email list
+* Automated report archiving for Allure and Playwright HTML
+* Automated styled HTML notification emails dispatched via the Jenkins Email Extension plugin
 
----
+### 2. GitHub Actions (`.github/workflows/playwright.yml`)
 
-## 📈 CI Execution Example
-
-Example Jenkins execution:
-
-```bash
-npm ci
-
-npx playwright install --with-deps
-
-npm run test
-```
-
-A browser-specific execution can be configured through the Jenkins parameters.
-
-Example:
-
-```text
-Browser: firefox
-Tags: @smoke
-Headless: true
-Workers: 4
-```
+* Runs on `ubuntu-latest` with Node.js 24
+* Non-interactive Playwright and browser installation (`--with-deps`)
+* Google Chrome installation on Linux runners
+* Artifact uploads with 30-day retention
+* Test outcome email dispatch with attached standalone HTML report via `dawidd6/action-send-mail`
 
 ---
 
 ## 📦 Git Workflow
 
-Review repository changes:
-
 ```bash
+# Check status
 git status
-```
 
-Stage the framework:
+# Stage changes
+git add .
 
-```bash
-git add \
-  package.json \
-  playwright.config.ts \
-  Jenkinsfile \
-  src/ \
-  tests/ \
-  data/ \
-  README.md \
-  .gitignore
-```
+# Commit
+git commit -m "docs: update comprehensive framework documentation"
 
-Commit:
-
-```bash
-git commit -m "docs: update Playwright DDT framework documentation"
-```
-
-Push:
-
-```bash
+# Push to repository
 git push origin main
+
 ```
 
 ---
 
 ## 🔐 Git & Secret Management
 
-The following should **not** be committed to source control:
+Do not commit the following files:
 
 ```text
 .env
@@ -983,165 +700,35 @@ playwright-report/
 test-results/
 allure-results/
 allure-report/
+*.zip
 *.log
+
 ```
-
-Sensitive values such as:
-
-```text
-Passwords
-API keys
-Access tokens
-Production credentials
-```
-
-should be injected through environment variables or CI/CD credential management.
 
 ---
 
 ## 🧱 Best Practices
 
-### Locator Strategy
-
-Prefer resilient, user-facing locators:
-
-```typescript
-page.getByRole()
-page.getByLabel()
-page.getByText()
-page.getByTestId()
-```
-
-Avoid unnecessarily brittle XPath or CSS selectors where stable semantic locators are available.
+* **Semantic Locators:** Use user-facing locators (`page.getByRole()`, `page.getByLabel()`, `page.getByText()`, `page.getByTestId()`) instead of fragile XPaths.
+* **Web-First Assertions:** Use `expect(locator).toBeVisible()` to leverage automatic polling.
+* **Test Independence:** Ensure each test sets up its own preconditions and runs independently.
+* **Data Externalization:** Maintain datasets in external JSON and Excel files.
+* **Single Page Responsibility:** Encapsulate only UI locators and interactions in Page Objects.
 
 ---
 
-### Assertions
-
-Prefer Playwright web-first assertions:
-
-```typescript
-await expect(page.getByRole('heading')).toBeVisible();
-```
-
-rather than manual polling or fixed delays.
-
----
-
-### Test Independence
-
-Each test should be independently executable and should not depend on the execution order of another test.
-
----
-
-### Test Data Separation
-
-Keep external test data outside test specifications:
-
-```text
-tests/
-    ↓
-data/
-```
-
-This makes test maintenance easier and allows data changes without modifying test logic.
-
----
-
-### Page Object Responsibility
-
-Page Objects should contain UI interaction and page-specific behavior.
-
-Avoid placing large business workflows or unrelated assertions into `BasePage`.
-
----
-
-### Environment Separation
-
-Keep environment-specific configuration outside the test implementation:
-
-```text
-.env
-src/config/env.config.ts
-```
-
-This allows the same automation suite to run against different environments.
-
----
-
-## 📌 Framework Summary
-
-```text
-┌─────────────────────────────────────────────┐
-│       Playwright TypeScript DDT Framework   │
-├─────────────────────────────────────────────┤
-│                                             │
-│  ✓ TypeScript                              │
-│  ✓ Playwright Test                         │
-│  ✓ Page Object Model                       │
-│  ✓ Custom Fixtures                         │
-│  ✓ JSON Data-Driven Testing                │
-│  ✓ Excel Data-Driven Testing               │
-│  ✓ Chromium Support                        │
-│  ✓ Google Chrome Support                   │
-│  ✓ Firefox Support                         │
-│  ✓ Microsoft Edge Support                  │
-│  ✓ Parallel Execution                      │
-│  ✓ Auto-Waiting                            │
-│  ✓ Web-First Assertions                    │
-│  ✓ Environment Configuration               │
-│  ✓ Playwright HTML Reports                 │
-│  ✓ Allure Reports                          │
-│  ✓ Screenshot / Trace / Video Evidence     │
-│  ✓ Jenkins CI/CD                           │
-│  ✓ Configurable Workers                    │
-│  ✓ Smoke & Regression Execution            │
-│  ✓ GitHub & Git Workflow                   │
-│  ✓ Node.js & npm Ecosystem                 │
-│                                             │
-└─────────────────────────────────────────────┘
-```
-
----
-
-## 📋 Quick Reference
-
-| Requirement | Command |
-| :--- | :--- |
-| Install dependencies | `npm ci` |
-| Install browsers | `npx playwright install --with-deps` |
-| Run complete suite | `npm run test` |
-| Run headed | `npm run test:headed` |
-| Run Chrome | `npm run test:chrome` |
-| Run Firefox | `npm run test:firefox` |
-| Run Edge | `npm run test:edge` |
-| Run Smoke | `npm run test:smoke` |
-| Run Regression | `npm run test:regression` |
-| Open Playwright report | `npm run report` |
-| Serve Allure report | `npm run allure:serve` |
-| Generate Allure report | `npm run allure:generate` |
-| Open Allure report | `npm run allure:open` |
-| Debug tests | `npx playwright test --debug` |
-
----
-
-## 👨‍💻 Author & Profiles
+## 👨‍💻 Author
 
 **Mahesh Holkar**
 
-**Playwright + TypeScript E2E Test Automation Framework**
+*Senior Automation Test Engineer (SDET)*
 
-- GitHub: https://github.com/MaheshH91
-- LinkedIn: https://www.linkedin.com/in/mahesh-holkar/
+* **LinkedIn:** [maheshholkarqaengineer](https://www.linkedin.com/in/maheshholkarqaengineer/)
+* **GitHub:** [@MaheshH91](https://www.google.com/search?q=https://github.com/MaheshH91)
+* **Repository:** [playwright-ts-ddt-framework](https://github.com/MaheshH91/playwright-ts-ddt-framework.git)
 
 ---
 
 ## 📄 License
 
-Add the applicable project license here.
-
-Example:
-
-```text
-@MaheshH91
-```
+This project is licensed under the [MIT License](https://www.google.com/search?q=LICENSE).
