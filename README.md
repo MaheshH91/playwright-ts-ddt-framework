@@ -2,7 +2,7 @@
 
 An enterprise-grade **End-to-End Test Automation Framework** built with **Playwright, TypeScript, Page Object Model (POM), and Data-Driven Testing (DDT)** using JSON and Excel test data.
 
-The framework targets the **TutorialsNinja Demo Application** and is designed for maintainable UI automation, cross-browser execution, parallel testing, robust synchronization, reusable page objects, comprehensive reporting, and Jenkins-based CI/CD execution.
+The framework targets the **TutorialsNinja Demo Application** and is designed for maintainable UI automation, cross-browser execution, parallel testing, robust synchronization, reusable page objects, and CI/CD-friendly execution.
 
 ---
 
@@ -23,7 +23,7 @@ The framework targets the **TutorialsNinja Demo Application** and is designed fo
 - [CI/CD with Jenkins](#-cicd-with-jenkins)
 - [Git Workflow](#-git-workflow)
 - [Best Practices](#-best-practices)
-- [Author](#-author)
+- [Author & Profiles](#-author--profiles)
 
 ---
 
@@ -50,6 +50,7 @@ The framework is designed around:
 - Failure screenshots
 - Trace and video artifacts
 - Jenkins CI/CD integration
+- GitHub-based version control workflow
 
 Playwright supports multiple browser projects, including Chromium, Firefox, WebKit, Google Chrome, and Microsoft Edge, through `playwright.config.ts`.
 
@@ -61,6 +62,8 @@ Playwright supports multiple browser projects, including Chromium, Firefox, WebK
 | :--- | :--- |
 | **Playwright Test** | Browser automation, test execution, auto-waiting, assertions and reporting |
 | **TypeScript** | Strong typing and scalable test development |
+| **Node.js** | JavaScript runtime for the test framework |
+| **npm** | Package management and script execution |
 | **Page Object Model** | UI abstraction and separation of concerns |
 | **XLSX / SheetJS** | Excel test-data processing |
 | **JSON** | Structured external test data |
@@ -69,6 +72,9 @@ Playwright supports multiple browser projects, including Chromium, Firefox, WebK
 | **Allure Reporter** | Detailed execution dashboards and historical reporting |
 | **Playwright HTML Reporter** | Native execution report with traces and artifacts |
 | **Jenkins** | CI/CD pipeline automation |
+| **GitHub Actions** | Workflow automation and repository-based CI |
+| **Git & GitHub** | Version control, collaboration, and source management |
+| **VS Code** | Development environment |
 | **Browsers** | Chromium, Chrome, Firefox, Microsoft Edge |
 
 ---
@@ -718,7 +724,7 @@ The framework provides two reporting mechanisms:
 
 ### 1. Playwright HTML Report
 
-The native Playwright HTML reporter provides detailed execution information, including test results and failure details. The report can also expose trace information and attached artifacts when configured by the project.
+The native Playwright HTML reporter provides detailed execution information, including test results and failure details. The report can also expose trace information and attached artifacts when configured.
 
 Open the report:
 
@@ -1090,6 +1096,8 @@ This allows the same automation suite to run against different environments.
 │  ✓ Jenkins CI/CD                           │
 │  ✓ Configurable Workers                    │
 │  ✓ Smoke & Regression Execution            │
+│  ✓ GitHub & Git Workflow                   │
+│  ✓ Node.js & npm Ecosystem                 │
 │                                             │
 └─────────────────────────────────────────────┘
 ```
@@ -1117,11 +1125,14 @@ This allows the same automation suite to run against different environments.
 
 ---
 
-## 👨‍💻 Author
+## 👨‍💻 Author & Profiles
 
 **Mahesh Holkar**
 
 **Playwright + TypeScript E2E Test Automation Framework**
+
+- GitHub: https://github.com/MaheshH91
+- LinkedIn: https://www.linkedin.com/in/mahesh-holkar/
 
 ---
 
