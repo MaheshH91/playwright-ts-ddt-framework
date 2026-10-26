@@ -1,8 +1,8 @@
 pipeline {
     agent any
 
-    tools {
-        nodejs 'NodeJS 26.4.0' // Match your configured Jenkins tool name
+   tools {
+        nodejs 'NodeJS 24.21.0'
     }
 
     parameters {
