@@ -10,13 +10,13 @@ on:
       project:
         description: 'Target browser'
         required: true
-        default: 'all'
+        default: 'chromium'
         type: choice
         options:
-          - all
           - chromium
+          - chrome
           - firefox
-          - edge
+          - all
       tag:
         description: 'Tag to run'
         required: true
@@ -44,6 +44,14 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
+      - name: Install Google Chrome (for chrome channel)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget
+          wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt-get -fy install
+          rm google-chrome-stable_current_amd64.deb
+
       - name: Install Playwright Browsers and System Dependencies
         run: npx playwright install --with-deps
         env:
@@ -53,12 +61,35 @@ jobs:
         id: run_tests
         continue-on-error: true
         run: |
-          PROJECT_ARG="${{ github.event.inputs.project != 'all' && github.event.inputs.project != '' && format('--project={0}', github.event.inputs.project) || '' }}"
-          TAG_ARG="${{ github.event.inputs.tag != 'all' && github.event.inputs.tag != '' && format('--grep {0}', github.event.inputs.tag) || '' }}"
+          # Use user-selected project on workflow_dispatch; default to chromium on git push/PR
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            PROJECT_VAL="${{ github.event.inputs.project }}"
+            TAG_VAL="${{ github.event.inputs.tag }}"
+          else
+            PROJECT_VAL="chromium"
+            TAG_VAL="all"
+          fi
+
+          PROJECT_ARG=""
+          if [ "$PROJECT_VAL" != "all" ] && [ -n "$PROJECT_VAL" ]; then
+            PROJECT_ARG="--project=$PROJECT_VAL"
+          fi
+
+          TAG_ARG=""
+          if [ "$TAG_VAL" != "all" ] && [ -n "$TAG_VAL" ]; then
+            TAG_ARG="--grep $TAG_VAL"
+          fi
+
           npx playwright test $PROJECT_ARG $TAG_ARG
         env:
-          HEADLESS: true
-          URL: https://tutorialsninja.com/demo/
+          CI: 'true'
+          HEADLESS: 'true'
+          URL: 'https://tutorialsninja.com/demo/'
+          VALID_EMAIL: ${{ secrets.VALID_EMAIL || 'mahesh.jadhav@aressindia.net' }}
+          VALID_PASSWORD: ${{ secrets.VALID_PASSWORD || '123456789' }}
+          EXPLICIT_WAIT: '15'
+          PAGE_LOAD_TIMEOUT: '25'
+          MAX_RETRY_COUNT: '1'
 
       - name: Upload Playwright Report Artifact
         uses: actions/upload-artifact@v4
@@ -80,13 +111,29 @@ jobs:
           to: ${{ secrets.MAIL_TO }}
           from: "Playwright Automation CI <${{ secrets.MAIL_USERNAME }}>"
           html_body: |
-            <h2>Playwright Test Execution Results</h2>
-            <p><strong>Status:</strong> ${{ steps.run_tests.outcome }}</p>
-            <p><strong>Repository:</strong> ${{ github.repository }}</p>
-            <p><strong>Branch:</strong> ${{ github.ref_name }}</p>
-            <p><a href="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}">View GitHub Actions Run Logs</a></p>
-            <p>The execution HTML report is attached to this email.</p>
+            <!DOCTYPE html>
+            <html>
+            <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+              <h2 style="color: ${{ steps.run_tests.outcome == 'success' && '#28a745' || '#dc3545' }};">
+                Playwright Test Execution: ${{ steps.run_tests.outcome == 'success' && 'PASSED' || 'FAILED' }}
+              </h2>
+              <table style="border-collapse: collapse; width: 100%; max-width: 500px;">
+                <tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Repository:</td><td style="padding: 8px; border: 1px solid #ddd;">${{ github.repository }}</td></tr>
+                <tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Branch:</td><td style="padding: 8px; border: 1px solid #ddd;">${{ github.ref_name }}</td></tr>
+                <tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Commit:</td><td style="padding: 8px; border: 1px solid #ddd;">${{ github.sha }}</td></tr>
+                <tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Status:</td><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold; color: ${{ steps.run_tests.outcome == 'success' && 'green' || 'red' }};">${{ steps.run_tests.outcome }}</td></tr>
+              </table>
+              <p style="margin-top: 20px;">
+                <a href="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                   style="background-color: #0366d6; color: white; padding: 10px 18px; text-decoration: none; border-radius: 4px; display: inline-block;">
+                  View Run Logs & Traces
+                </a>
+              </p>
+              <p>The standalone HTML execution report is attached to this email.</p>
+            </body>
+            </html>
           attachments: playwright-report/index.html
+
       - name: Check Final Status
         if: steps.run_tests.outcome != 'success'
         run: exit 1
