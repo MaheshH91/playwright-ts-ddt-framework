@@ -80,27 +80,13 @@ jobs:
           to: ${{ secrets.MAIL_TO }}
           from: "Playwright Automation CI <${{ secrets.MAIL_USERNAME }}>"
           html_body: |
-            <!DOCTYPE html>
-            <html>
-            <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-              <h2 style="color: ${{ steps.run_tests.outcome == 'success' && '#28a745' || '#dc3545' }};">
-                Playwright Test Execution: ${{ steps.run_tests.outcome == 'success' && 'PASSED' || 'FAILED' }}
-              </h2>
-              <table style="border-collapse: collapse; width: 100%; max-width: 500px;">
-                <tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Repository:</td><td style="padding: 8px; border: 1px solid #ddd;">${{ github.repository }}</td></tr>
-                <tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Branch:</td><td style="padding: 8px; border: 1px solid #ddd;">${{ github.ref_name }}</td></tr>
-                <tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Commit:</td><td style="padding: 8px; border: 1px solid #ddd;">${{ github.sha }}</td></tr>
-                <tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Status:</td><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold; color: ${{ steps.run_tests.outcome == 'success' && 'green' || 'red' }};">${{ steps.run_tests.outcome }}</td></tr>
-              </table>
-              <p style="margin-top: 20px;">
-                <a href="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-                   style="background-color: #0366d6; color: white; padding: 10px 18px; text-decoration: none; border-radius: 4px; display: inline-block;">
-                  View Run Logs & Download HTML Report
-                </a>
-              </p>
-            </body>
-            </html>
-
+            <h2>Playwright Test Execution Results</h2>
+            <p><strong>Status:</strong> ${{ steps.run_tests.outcome }}</p>
+            <p><strong>Repository:</strong> ${{ github.repository }}</p>
+            <p><strong>Branch:</strong> ${{ github.ref_name }}</p>
+            <p><a href="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}">View GitHub Actions Run Logs</a></p>
+            <p>The execution HTML report is attached to this email.</p>
+          attachments: playwright-report/index.html
       - name: Check Final Status
         if: steps.run_tests.outcome != 'success'
         run: exit 1

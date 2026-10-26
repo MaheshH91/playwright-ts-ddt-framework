@@ -10,7 +10,10 @@ export default defineConfig({
     workers: process.env.CI ? 2 : undefined,
     reporter: [
         ['list'],
+        // Standard interactive folder report for CI/Jenkins artifact viewer
         ['html', { outputFolder: 'playwright-report', open: 'never' }],
+        // Monolithic standalone HTML report for direct email attachment
+        ['html', { outputFile: 'playwright-report/index.html', open: 'never' }],
         ['json', { outputFile: 'reports/test-results.json' }],
         [
             'allure-playwright',
@@ -25,13 +28,13 @@ export default defineConfig({
         baseURL: process.env.URL || ENV.BASE_URL || 'https://tutorialsninja.com/demo/',
         headless: process.env.HEADLESS !== 'false',
         viewport: { width: 1920, height: 1080 },
-        actionTimeout: Number(ENV.EXPLICIT_WAIT) * 1000,
-        navigationTimeout: Number(ENV.PAGE_LOAD_TIMEOUT) * 1000,
+        actionTimeout: Number(ENV.EXPLICIT_WAIT || 10) * 1000,
+        navigationTimeout: Number(ENV.PAGE_LOAD_TIMEOUT || 15) * 1000,
         screenshot: 'only-on-failure',
         video: 'retain-on-failure',
         trace: 'retain-on-failure',
 
-        // Cleaned launch options that work consistently across headed, headless, and CI/Jenkins environments
+        // Launch flags optimized for both Windows local runs and Ubuntu Linux CI containers
         launchOptions: {
             args: [
                 '--no-sandbox',
@@ -41,7 +44,6 @@ export default defineConfig({
             ],
         },
 
-        // Custom headers to prevent server-side redirect triggers
         userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
         extraHTTPHeaders: {
             'Accept-Language': 'en-US,en;q=0.9',
@@ -52,7 +54,7 @@ export default defineConfig({
             name: 'chrome',
             use: {
                 ...devices['Desktop Chrome'],
-                channel: 'chrome', // Launches locally installed Google Chrome
+                channel: 'chrome',
             },
         },
         {
@@ -71,7 +73,7 @@ export default defineConfig({
             name: 'edge',
             use: {
                 ...devices['Desktop Edge'],
-                channel: 'msedge', // Launches locally installed Microsoft Edge
+                channel: 'msedge',
             },
         },
     ],
